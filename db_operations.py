@@ -1,6 +1,13 @@
 import sqlite3
 
 class DbOperation:
+
+    """
+    Klasa DbOperation zapewnia interfejs do operacji CRUD na bazie danych SQLite.
+    
+    Jest to klasa Singleton, co oznacza, że zawsze istnieje tylko jedna instancja tej klasy.
+    """
+
     _instance = None
 
     def __new__(cls, *args, **kwargs):
@@ -9,13 +16,24 @@ class DbOperation:
         return cls._instance
 
     def __init__(self):
+        """Inicjalizuje obiekt DbOperation z pustą listą obserwatorów."""
         self._observers = []
 
     def connect_to_db(self):
+        """
+        Łączy się z bazą danych SQLite.
+
+        :return: Połączenie do bazy danych
+        """
         conn = sqlite3.connect("password_records.db")
         return conn
 
     def create_table(self, table_name="password_info"):
+        """
+        Tworzy tabelę w bazie danych, jeśli nie istnieje.
+
+        :param table_name: Nazwa tabeli
+        """
         conn = self.connect_to_db()
         query = f'''
         CREATE TABLE IF NOT EXISTS {table_name}(
@@ -32,6 +50,12 @@ class DbOperation:
             cursor.execute(query)
 
     def create_record(self, data, table_name="password_info"):
+        """
+        Tworzy nowy rekord w tabeli.
+
+        :param data: Słownik z danymi rekordu
+        :param table_name: Nazwa tabeli
+        """
         title = data['title']
         username = data['username']
         password = data['password']

@@ -17,7 +17,6 @@ __pycache__/
 
 # SQLite database files
 *.db
-*.docx
 
 # OS files
 .DS_Store

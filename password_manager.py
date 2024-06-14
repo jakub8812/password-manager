@@ -4,7 +4,17 @@ from db_operations import DbOperation
 import pyperclip
 
 class root_window:
+    """
+    Klasa root_window zapewnia GUI do zarządzania hasłami przy użyciu Tkinter.
+    """
+
     def __init__(self, root, db):
+        """
+        Inicjalizuje główne okno aplikacji.
+
+        :param root: Obiekt Tkintera
+        :param db: Obiekt DbOperation
+        """
         self.db = db
         self.db.register_observer(self)
         self.root = root
